@@ -1,8 +1,8 @@
 import { useState } from 'react';
-// import { BrowserRouter, Routes, Route } from 'react-router'; // Import from 'react-router' instead of 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import from 'react-router' instead of 'react-router-dom'
 import './App.css';
 import Navbar from './Components/Navbar';
-// import About from './Components/About';
+import About from './Components/About';
 import TextForm from './Components/TextForm';
 import Alert from './Components/Alert';
 
@@ -33,13 +33,18 @@ function App() {
   }
 
   return (
-      <>
-      <Navbar title="Text Converter" about="About Converter" mode={mode} toggleMode={toggleMode} />
-      <Alert alert={alert} />
-      <div className="container my-3">
-        <TextForm showAlert={showAlert} heading="Enter the text to analyze below" mode={mode} />
-      </div>
-    
+    <>
+      <BrowserRouter>
+        <Navbar title="TextUtils" about="About TextUtils" mode={mode} toggleMode={toggleMode} />
+        <Alert alert={alert} />
+        <div className="container my-3">
+          <Routes>
+            <Route exact path="/about" element={<About mode={mode} />} />
+            <Route exact path="/" element={<TextForm showAlert={showAlert} 
+            heading="Try TextUtils- Word Counter Character Counter Remove Extra Spaces" mode={mode} />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </>
   );
 }
